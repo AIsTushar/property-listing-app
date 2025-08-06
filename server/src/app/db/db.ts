@@ -25,7 +25,6 @@ export const initiateSuperAdmin = async () => {
 
     await TransactionClient.user.create({
       data: {
-        name: payload.name,
         email: payload.email,
         password: hashedPassword,
         isEmailVerified: payload.isEmailVerified,

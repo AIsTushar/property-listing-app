@@ -145,15 +145,13 @@ const makeAdmin = catchAsync(async (req, res) => {
     data: isok ? result : [],
   });
 });
-const socialLogin = catchAsync(async (req, res) => {
-  const result = await AuthServices.socialLogin(req.body);
-  const isok = result ? true : false;
-  sendResponse(res, {
-    statusCode: isok ? 200 : 400,
-    success: isok,
-    message: isok ? "Login Successfull" : "Login Failed",
-    data: isok ? result : [],
-  });
+
+const handleGoogleCallback = catchAsync(async (req, res) => {
+  const userData = req.user as any;
+
+  res.redirect(
+    `${process.env.FRONTEND_URL}/social-success?accessToken=${userData.accessToken}&refreshToken=${userData.refreshToken}`
+  );
 });
 
 export const AuthController = {
@@ -166,5 +164,5 @@ export const AuthController = {
   refreshToken,
   resendVerifyEmail,
   makeAdmin,
-  socialLogin,
+  handleGoogleCallback,
 };

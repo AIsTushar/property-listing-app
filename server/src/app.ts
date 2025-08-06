@@ -5,18 +5,12 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import router from "./app/routes";
 import GlobalErrorHandler from "./app/middlewares/globalErrorHandler";
+import passport from "./config/passportSetup";
 
 const app: Application = express();
 
 export const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "https://aiarealty-frontend.vercel.app",
-    "https://aiarealty.com",
-    "https://www.aiarealty.com",
-    "https://api.aiarealty.com",
-  ],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: [
     "Content-Type",
@@ -32,11 +26,13 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(passport.initialize());
 
 // Route handler for the root endpoint
 app.get("/", (req: Request, res: Response) => {
   res.send({
-    message: "Welcome to Aiarealty Project API",
+    message:
+      "Welcome to HomeHaven — Real Estate Listing & Booking Platform Project API",
   });
 });
 

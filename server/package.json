@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tushar",
   "license": "ISC",
   "description": "",
   "devDependencies": {
@@ -25,6 +25,8 @@
     "@types/multer": "^1.4.13",
     "@types/node": "^24.0.4",
     "@types/node-cron": "^3.0.11",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "prisma": "^6.10.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
@@ -47,6 +49,8 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
     "nanoid": "^5.1.5",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "uuid": "^11.1.0",
     "zod": "^3.25.67"
   }

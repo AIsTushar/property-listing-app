@@ -48,7 +48,6 @@ const register = async (payload: IUser) => {
   // 1. Create the user
   const result = await prisma.user.create({
     data: {
-      name: payload.name,
       email: payload.email,
       password: payload.password,
       isEmailVerified: false,
@@ -59,7 +58,6 @@ const register = async (payload: IUser) => {
     select: {
       id: true,
       email: true,
-      name: true,
       role: true,
     },
   });
@@ -68,7 +66,7 @@ const register = async (payload: IUser) => {
   await prisma.profile.create({
     data: {
       userId: result.id,
-      name: result.name,
+      name: payload.name,
     },
   });
 
@@ -106,7 +104,6 @@ const verifyEmail = async (email: string, token: string) => {
     select: {
       id: true,
       email: true,
-      name: true,
       role: true,
     },
   });
@@ -146,11 +143,9 @@ const login = async (payload: ILoginUser) => {
     select: {
       id: true,
       email: true,
-      name: true,
       password: true,
       isDeleted: true,
       isEmailVerified: true,
-      approvalStatus: true,
       role: true,
     },
   });
@@ -211,13 +206,14 @@ const login = async (payload: ILoginUser) => {
     },
   });
 
+  if (!profile) {
+    throw new ApiError(404, "Profile not found");
+  }
+
   return {
     user: {
-      id: user.id,
       email: user.email,
-      name: user.name,
       role: user.role,
-      approvalStatus: user.approvalStatus,
       ...profile,
     },
     accessToken,
@@ -444,7 +440,6 @@ const makeAdmin = async (payload: IUser) => {
 
   const result = await prisma.user.create({
     data: {
-      name,
       email,
       password: hashedPassword,
       role: "ADMIN",
@@ -453,7 +448,6 @@ const makeAdmin = async (payload: IUser) => {
     select: {
       id: true,
       email: true,
-      name: true,
       role: true,
       isEmailVerified: true,
     },
@@ -463,72 +457,111 @@ const makeAdmin = async (payload: IUser) => {
   await prisma.profile.create({
     data: {
       userId: result.id,
-      name: result.name,
+      name: payload.name,
     },
   });
 
   return result;
 };
 
-const socialLogin = async (payload: { email: string; name: string }) => {
-  const userExist = await prisma.user.findUnique({
-    where: {
-      email: payload.email,
+const handleGoogleLogin = async (profile: any) => {
+  const email = profile.emails?.[0]?.value;
+  const name = profile.displayName;
+
+  if (!email) {
+    throw new ApiError(400, "Google account does not have a public email");
+  }
+
+  // Check if user already exists
+  let user = await prisma.user.findUnique({
+    where: { email },
+    select: {
+      id: true,
+      email: true,
+      role: true,
+      isDeleted: true,
     },
   });
 
-  if (!userExist) {
-    await prisma.user.create({
+  // If not, register new user
+  if (!user) {
+    const dummyPassword = await bcrypt.hash(
+      crypto.randomBytes(32).toString("hex"), // create a secure random password
+      Number(process.env.SALT_ROUNDS)
+    );
+
+    user = await prisma.user.create({
       data: {
-        name: payload.name, // Use email prefix as username
-        email: payload.email,
+        email,
+        password: dummyPassword,
         isEmailVerified: true,
-        password: "SOCIAL_LOGIN_USER_NO_PASSWORD",
-        role: "USER", // Or use UserRole.USER if using enum
+        isDeleted: false,
+        role: "USER",
+      },
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        isDeleted: true,
+      },
+    });
+
+    if (!user) {
+      throw new ApiError(404, "User not found");
+    }
+
+    await prisma.profile.create({
+      data: {
+        userId: user.id,
+        name: name,
       },
     });
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: payload.email,
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      password: true,
-      role: true,
-      isEmailVerified: true,
-    },
-  });
-
-  if (!user) {
-    throw new ApiError(400, "User not found with this email");
+  if (user.isDeleted) {
+    throw new ApiError(401, "User is deleted");
   }
 
   const JwtPayload = {
     email: user.email,
-    userId: user?.id,
+    userId: user.id,
     role: user.role,
   };
 
-  //create toke and send to the client
   const accessToken = createToken(
     JwtPayload,
     process.env.ACCESS_TOKEN_SECRET as string,
     process.env.ACCESS_TOKEN_EXPIRES_IN as string
   );
 
-  //refresh token
   const refreshToken = createToken(
     JwtPayload,
     process.env.REFRESH_TOKEN_SECRET as string,
     process.env.REFRESH_TOKEN_EXPIRES_IN as string
   );
 
+  const profileData = await prisma.profile.findUnique({
+    where: { userId: user.id },
+    select: {
+      id: true,
+      name: true,
+      phone: true,
+      streetAddress: true,
+      city: true,
+      zipCode: true,
+      region: true,
+      country: true,
+      Image: true,
+    },
+  });
+
   return {
-    user,
+    user: {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      ...profileData,
+    },
     accessToken,
     refreshToken,
   };
@@ -544,5 +577,5 @@ export const AuthServices = {
   refreshToken,
   resendVerifyEmail,
   makeAdmin,
-  socialLogin,
+  handleGoogleLogin,
 };
