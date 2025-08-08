@@ -1,3 +1,4 @@
+import ButtonHero from "@/components/UI/ButtonHero";
 import PropertyCard from "@/components/UI/Property-card";
 
 export default function FeaturedProperties() {
@@ -130,6 +131,10 @@ export default function FeaturedProperties() {
           {properties.map((property, index) => (
             <PropertyCard key={index} {...property} />
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <ButtonHero text="View All Properties" />
         </div>
       </div>
     </section>
