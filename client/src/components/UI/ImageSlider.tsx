@@ -18,7 +18,7 @@ const images: ImageData[] = [
   },
   {
     id: 2,
-    url: "https://images.unsplash.com/photo-1572120360610-d971b9b78857?auto=format&fit=crop&w=2071&q=80",
+    url: "https://plus.unsplash.com/premium_photo-1661877360520-f70603f7c0d8?q=80&w=1267&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Luxury Living Room Interior",
   },
   {
@@ -33,7 +33,7 @@ const images: ImageData[] = [
   },
   {
     id: 5,
-    url: "https://images.unsplash.com/photo-1598928506311-c55ded91a20f?auto=format&fit=crop&w=2074&q=80",
+    url: "https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alt: "Modern Apartment Building Exterior",
   },
 ];
