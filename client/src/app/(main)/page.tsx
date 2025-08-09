@@ -6,12 +6,10 @@ import LocationShowcase from "@/components/HomePage/locationShowcase/location-sh
 import InteractivePropertyShowcase from "@/components/HomePage/property-showcase/interactive-property-showcase";
 import ParallaxStatsSection from "@/components/HomePage/stats-section/parallax-stats-section";
 import TestimonialsSection from "@/components/HomePage/testimonials/testimonials-section";
-import Navbar from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
     <div>
-      <Navbar />
       <Hero />
       <About />
       <FeaturedProperties />

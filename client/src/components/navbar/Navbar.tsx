@@ -25,12 +25,12 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="text-sm font-semibold">
+            <Link href="/properties" className="text-sm font-semibold">
               Properties
             </Link>
           </li>
           <li>
-            <Link href="/about" className="text-sm font-semibold">
+            <Link href="/blog" className="text-sm font-semibold">
               Blog
             </Link>
           </li>
