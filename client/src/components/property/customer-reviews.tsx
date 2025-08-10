@@ -98,7 +98,7 @@ export default function CustomerReviews({
   };
 
   return (
-    <div className="bg-white">
+    <div className="border rounded-2xl border-gray-200 p-6">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-bold text-gray-900">Customer Reviews</h3>
         <button className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">

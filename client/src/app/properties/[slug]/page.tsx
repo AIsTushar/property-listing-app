@@ -8,7 +8,7 @@ import WhatsNearby from "@/components/property/whats-nearby";
 
 export default function PropertyDetailsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 max-w-5xl mx-auto mt-16">
+    <div className="min-h-screen max-w-5xl mx-auto mt-16">
       <PropertyDetailsHeader
         title="Luxury Villa in Dhaka"
         price="$2,500"
@@ -28,9 +28,13 @@ export default function PropertyDetailsPage() {
 
       {/* Contact and Reviews Section */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid lg:grid-cols-2 gap-8">
-          <ContactSellers />
-          <CustomerReviews />
+        <div className="grid lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-1">
+            <ContactSellers />
+          </div>
+          <div className="lg:col-span-2">
+            <CustomerReviews />
+          </div>
         </div>
       </div>
 
@@ -38,8 +42,8 @@ export default function PropertyDetailsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-6">
           <p className="text-gray-500 text-center">
-            Additional sections like amenities, floor plans, neighborhood info,
-            etc. would go here...
+            Other related properties or additional information can be added
+            here.
           </p>
         </div>
       </div>

@@ -1,12 +1,4 @@
-import {
-  Bed,
-  Bath,
-  Square,
-  ArrowLeftRight,
-  Heart,
-  Share2,
-  MapPin,
-} from "lucide-react";
+import { Bed, Bath, Square, ArrowLeftRight, Heart, MapPin } from "lucide-react";
 import Image from "next/image";
 
 interface PropertyDetailsHeaderProps {
@@ -36,14 +28,14 @@ export default function PropertyDetailsHeader({
 }: PropertyDetailsHeaderProps) {
   return (
     <div className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Content */}
-        <div className="mb-8">
+        <div className="mb-6">
           {/* Status Badges and Price */}
-          <div className="flex justify-between items-start mb-6">
+          <div className="flex justify-between items-start">
             <div className="flex gap-3">
               <span
-                className={`px-3 py-1.5 rounded-md text-sm font-medium ${
+                className={`px-2 py-1 rounded-md text-xs font-medium ${
                   status === "For Rent"
                     ? "bg-green-500 text-white"
                     : "bg-red-500 text-white"
@@ -51,7 +43,7 @@ export default function PropertyDetailsHeader({
               >
                 {status}
               </span>
-              <span className="bg-gray-200 text-gray-700 px-3 py-1.5 rounded-md text-sm font-medium">
+              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">
                 {propertyType}
               </span>
             </div>
@@ -63,32 +55,34 @@ export default function PropertyDetailsHeader({
           </div>
 
           {/* Property Title */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">{title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-6">{title}</h1>
+
+          <hr className="border-gray-200 mb-6" />
 
           {/* Features and Location */}
           <div className="flex justify-between items-center">
             <div className="flex gap-12">
               {/* Features */}
               <div>
-                <p className="text-sm text-orange-500 font-medium mb-3">
-                  Features
+                <p className="text-xs text-gray-500 font-medium mb-3">
+                  Features:
                 </p>
                 <div className="flex items-center gap-6">
                   <div className="flex items-center gap-2">
-                    <Bed className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-900 font-medium">
+                    <Bed className="w-4 h-4 text-gray-600" />
+                    <span className="text-gray-900 font-medium text-sm">
                       {beds} Beds
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Bath className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-900 font-medium">
+                    <Bath className="w-4 h-4 text-gray-600" />
+                    <span className="text-gray-900 font-medium text-sm">
                       {baths} Baths
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Square className="w-5 h-5 text-gray-600" />
-                    <span className="text-gray-900 font-medium">
+                    <Square className="w-4 h-4 text-gray-600" />
+                    <span className="text-gray-900 font-medium text-sm">
                       {sqft} Sqft
                     </span>
                   </div>
@@ -97,26 +91,25 @@ export default function PropertyDetailsHeader({
 
               {/* Location */}
               <div>
-                <p className="text-sm text-orange-500 font-medium mb-3">
-                  Location
+                <p className="text-xs text-gray-500 font-medium mb-3">
+                  Location:
                 </p>
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-900 font-medium">{address}</span>
+                  <MapPin className="w-4 h-4 text-gray-600" />
+                  <span className="text-gray-900 font-medium text-sm">
+                    {address}
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3">
-              <button className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <ArrowLeftRight className="w-5 h-5 text-gray-600" />
+              <button className="w-10 cursor-pointer h-10 border bg-gray-50 border-gray-200 rounded-lg flex items-center justify-center hover:bg-white hover:border-gray-500 transition-colors">
+                <ArrowLeftRight className="w-4 h-4 text-gray-600" />
               </button>
-              <button className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <Heart className="w-5 h-5 text-gray-600" />
-              </button>
-              <button className="w-12 h-12 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
-                <Share2 className="w-5 h-5 text-gray-600" />
+              <button className="w-10 h-10 border bg-gray-50 border-gray-300 cursor-pointer rounded-lg flex items-center justify-center hover:bg-white hover:border-gray-500 transition-colors">
+                <Heart className="w-4 h-5 text-gray-600" />
               </button>
             </div>
           </div>

@@ -77,28 +77,33 @@ export default function PropertyDetailsContent({
 
   return (
     <div className="bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Description Section */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
               Description
             </h2>
             <div className="space-y-4">
               {description.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="text-gray-600 leading-relaxed">
+                <p
+                  key={index}
+                  className="text-gray-500 leading-relaxed text-sm"
+                >
                   {paragraph}
                 </p>
               ))}
             </div>
-            <button className="mt-6 cursor-pointer text-gray-900 font-medium underline hover:no-underline transition-all">
+            <button className="mt-6 cursor-pointer text-sm text-gray-900 font-medium underline hover:no-underline transition-all">
               View More
             </button>
           </div>
 
           {/* Overview Section */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Overview</h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              Overview
+            </h2>
             <div className="grid grid-cols-2 gap-6">
               {overviewItems.map((item, index) => {
                 const IconComponent = item.icon;
@@ -108,8 +113,10 @@ export default function PropertyDetailsContent({
                       <IconComponent className="w-5 h-5 text-gray-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500 mb-1">{item.label}</p>
-                      <p className="font-semibold text-gray-900">
+                      <p className="text-sm text-gray-500 mb-1 ">
+                        {item.label}
+                      </p>
+                      <p className="font-semibold text-gray-900 text-sm">
                         {item.value}
                       </p>
                     </div>

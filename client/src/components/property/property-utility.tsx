@@ -94,7 +94,7 @@ export default function PropertyUtility({ utilities }: PropertyUtilityProps) {
                     <IconComponent className="w-5 h-5 text-gray-600" />
                   </div>
                   <div>
-                    <span className="text-gray-900 font-medium">
+                    <span className="text-gray-600 font-medium text-sm">
                       {utility.label}
                     </span>
                     {utility.detail && (
@@ -104,7 +104,7 @@ export default function PropertyUtility({ utilities }: PropertyUtilityProps) {
                     )}
                   </div>
                 </div>
-                <span className="text-gray-900 font-medium">
+                <span className="text-black font-medium">
                   {utility.available ? "Yes" : "No"}
                 </span>
               </div>
