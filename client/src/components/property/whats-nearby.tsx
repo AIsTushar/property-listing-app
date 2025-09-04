@@ -40,27 +40,6 @@ export default function WhatsNearby({
     amenities.slice(itemsPerColumn * 2),
   ];
 
-  const getCategoryColor = (category?: string) => {
-    switch (category) {
-      case "education":
-        return "text-blue-600";
-      case "healthcare":
-        return "text-red-600";
-      case "shopping":
-        return "text-purple-600";
-      case "recreation":
-        return "text-green-600";
-      case "dining":
-        return "text-orange-600";
-      case "transportation":
-        return "text-gray-600";
-      case "entertainment":
-        return "text-pink-600";
-      default:
-        return "text-gray-600";
-    }
-  };
-
   return (
     <div className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -75,7 +54,7 @@ export default function WhatsNearby({
         </div>
 
         {/* Amenities Grid */}
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid md:grid-cols-3 gap-4 lg:gap-10">
           {columns.map((column, columnIndex) => (
             <div key={columnIndex} className="space-y-4">
               {column.map((amenity, index) => (
@@ -83,14 +62,8 @@ export default function WhatsNearby({
                   key={index}
                   className="flex justify-between items-center py-2"
                 >
-                  <span
-                    className={`font-medium ${getCategoryColor(
-                      amenity.category
-                    )}`}
-                  >
-                    {amenity.name}:
-                  </span>
-                  <span className="text-gray-900 font-semibold">
+                  <span className="text-sm text-gray-500">{amenity.name}:</span>
+                  <span className="text-gray-900 font-semibold text-sm">
                     {amenity.distance}
                   </span>
                 </div>

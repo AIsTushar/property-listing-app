@@ -77,11 +77,11 @@ export default function ContactSellers({
 
       {/* Action Buttons */}
       <div className="space-y-3">
-        <button className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-2 px-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+        <button className="w-full cursor-pointer bg-gray-900 hover:bg-primary hover:text-black text-white py-2 px-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
           <PhoneCall className="w-4 h-4" />
           Call To Dealer
         </button>
-        <button className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white py-2 px-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+        <button className="w-full cursor-pointer bg-primary hover:bg-gray-800 text-black hover:text-white py-2 px-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
           <Mail className="w-4 h-4" />
           Mail To Dealer
         </button>
